@@ -4,27 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Real Estate AI Assistant</title>
-  <script type="module">
-    import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
-
-    Chatbot.init({
-      chatflowid: "1dd51e09-2bf2-43d5-becf-ba5211450011", 
-      apiHost: "https://cloud.flowiseai.com", 
-      theme: "light",
-      chatflowConfig: {
-        
-      },
-      user: {
-        userId: "user-001", 
-        name: "Client"
-      },
-    })
-  </script>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1 style="text-align:center;">🏠 Real Estate AI Assistant</h1>
-  <p style="text-align:center;">Your Smart Property Consultant in Dubai</p>
+  <div class="chat-container">
+    <div class="chat-header">
+      🏠 Real Estate AI Assistant
+    </div>
+    <div id="chat-box" class="chat-box"></div>
+    <div class="input-area">
+      <input type="text" id="user-input" placeholder="Type your message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
+
 
 
