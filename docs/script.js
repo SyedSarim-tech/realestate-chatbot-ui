@@ -19,11 +19,11 @@ function sendMessage() {
   // Show loading message
   appendMessage("⏳ Thinking...", "bot");
 
-  fetch("https://cloud.flowiseai.com/api/v1/prediction/1dd51e09-2bf2-43d5-becf-ba5211450011/1dd51e09-2bf2-43d5-becf-ba5211450011", {
+  fetch("https://cloud.flowiseai.com/api/v1/prediction/1dd51e09-2bf2-43d5-becf-ba5211450011", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Bearer YOUR_API_KEY"
+      "Authorization": "Bearer CkDo0GvF1fqlpciROGkhvJGBq6vY_QxfjK_XOBdj4wY"
     },
     body: JSON.stringify({
       question: message
@@ -48,6 +48,7 @@ function sendMessage() {
 
 // Start with welcome message
 appendMessage("👋 Welcome! I'm your Real Estate Assistant. Ask me anything about buying or renting properties in Dubai.", "bot");
+
 
  
 
