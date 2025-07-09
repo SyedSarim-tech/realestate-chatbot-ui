@@ -1,33 +1,53 @@
-const flowiseURL ="https://cloud.flowiseai.com/api/v1/prediction/1dd51e09-2bf2-43d5-becf-ba5211450011"; 
+const chatBox = document.getElementById("chat-box");
 
-function appendMessage(text, sender) {
-  const chatBox = document.getElementById("chat-box");
-  const message = document.createElement("div");
-  message.className = `message ${sender}`;
-  message.textContent = text;
-  chatBox.appendChild(message);
+function appendMessage(message, sender) {
+  const msg = document.createElement("div");
+  msg.className = `message ${sender}`;
+  msg.innerText = message;
+  chatBox.appendChild(msg);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-async function sendMessage() {
+function sendMessage() {
   const input = document.getElementById("user-input");
-  const userText = input.value.trim();
-  if (!userText) return;
+  const message = input.value.trim();
+  if (message === "") return;
 
-  appendMessage(userText, "user");
+  appendMessage(message, "user");
   input.value = "";
 
-  try {
-    const response = await fetch(flowiseURL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question: userText }),
-    });
+  // Show loading message
+  appendMessage("⏳ Thinking...", "bot");
 
-    const data = await response.json();
-    const botReply = data.text || "Sorry, I didn’t understand that.";
-    appendMessage(botReply, "bot");
-  } catch (error) {
-    appendMessage("Error connecting to the assistant.", "bot");
-  }
+  fetch("https://cloud.flowiseai.com/api/v1/prediction/1dd51e09-2bf2-43d5-becf-ba5211450011/1dd51e09-2bf2-43d5-becf-ba5211450011", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer YOUR_API_KEY"
+    },
+    body: JSON.stringify({
+      question: message
+    })
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Remove the loading message
+      const botMessages = document.querySelectorAll(".message.bot");
+      if (botMessages.length > 0 && botMessages[botMessages.length - 1].innerText === "⏳ Thinking...") {
+        botMessages[botMessages.length - 1].remove();
+      }
+
+      const reply = data.text || "⚠️ No response from assistant.";
+      appendMessage(reply, "bot");
+    })
+    .catch((error) => {
+      console.error(error);
+      appendMessage("❌ Error connecting to the assistant.", "bot");
+    });
 }
+
+// Start with welcome message
+appendMessage("👋 Welcome! I'm your Real Estate Assistant. Ask me anything about buying or renting properties in Dubai.", "bot");
+
+ 
+
