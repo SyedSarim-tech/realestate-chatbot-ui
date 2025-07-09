@@ -4,23 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Real Estate AI Assistant</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .centered-message {
+      text-align: center;
+      font-size: 20px;
+      color: #0077b6;
+    }
+  </style>
 </head>
 <body>
-  <div class="chat-container">
-    <div class="chat-header">
-      🏠 Real Estate AI Assistant
-    </div>
-    <div id="chat-box" class="chat-box"></div>
-    <div class="input-area">
-      <input type="text" id="user-input" placeholder="Type your message..." />
-      <button onclick="sendMessage()">Send</button>
-    </div>
+
+  <div class="centered-message">
+    🏡 Welcome to the Real Estate AI Assistant<br>
+    Click the chat icon in the bottom right to begin.
   </div>
 
-  <script src="script.js"></script>
+  <!-- Load Flowise Embed Script -->
+  <script src="https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"></script>
+
+  <!-- Initialize the Chat Widget -->
+  <script>
+    window.flowiseWebchat.openChat({
+      chatflowid: "1dd51e09-2bf2-43d5-becf-ba5211450011", 
+      apiHost: "https://cloud.flowiseai.com",              
+      theme: "dark",                                      
+      chatflowConfig: {},                                  
+      user: {
+        id: "visitor-123"                                  
+      }
+    });
+  </script>
+
 </body>
 </html>
+
 
 
 
